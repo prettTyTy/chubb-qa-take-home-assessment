@@ -7,6 +7,7 @@ import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,6 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         "app.events.cdc-enabled=false",
         "kafka.producer.schema-validation.enabled=false"
 })
+@Tag("integration")
 class ClaimKafkaIntegrationTest {
 
     @Autowired
