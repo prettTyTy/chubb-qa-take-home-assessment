@@ -72,7 +72,7 @@ This was documented as:
 
 
 
-AI was used to help interpret the logs and identify the likely configuration mismatch. The issue was still verified manually using the running application and logs.
+AI was used to help interpret the logs and identify the likely area involved. The issue was still verified manually using the running application and supporting logs.
 
 
 
@@ -246,27 +246,7 @@ The unexpected behaviour was not presented as a confirmed application bug.
 
 
 
-8\. CDC / Debezium Configuration Concern
-
-
-
-During source and environment review, the application configuration indicated that CDC was enabled.
-
-
-
-However, the provided Docker Compose setup did not contain a Debezium/Kafka Connect service, and no PostgreSQL publication was found during the initial environment check.
-
-
-
-This was documented as a configuration/integration concern rather than a confirmed production defect.
-
-
-
-Further investigation would be required to determine the intended CDC deployment setup.
-
-
-
-9\. Verification
+8\. Verification
 
 
 
@@ -288,11 +268,21 @@ The final verified test results were:
 
 
 
+Total:
+
+
+
+\* 11 tests passed
+
+\* 0 failures
+
+
+
 The tests were executed using the project's local environment and Maven/Vitest commands.
 
 
 
-10\. AI Usage Reflection
+9\. AI Usage Reflection
 
 
 
@@ -316,11 +306,57 @@ The main uses were:
 
 \* Troubleshooting test failures
 
+\* Interpreting application logs
+
 \* Improving QA documentation
 
 
 
-The final decisions about test scope, whether to keep or remove tests, and whether an observed behaviour should be reported as a bug or a concern were based on local test execution and application evidence.
+The final decisions about test scope, whether to keep or remove tests, and whether an observed behaviour should be reported as a bug or concern were based on local test execution and application evidence.
+
+
+
+10\. AI Decision Log
+
+
+
+Accepted
+
+
+
+AI suggestions for testing claim validation, status transitions, the claim submission flow, frontend validation and Kafka event publishing were accepted after reviewing the source code and verifying the tests locally.
+
+
+
+Challenged
+
+
+
+AI suggestions for broader test coverage across multiple API endpoints and frontend areas were considered but not prioritised because the assessment had a limited timebox and requested meaningful test variety rather than exhaustive coverage.
+
+
+
+The authorization test result was also investigated rather than immediately being treated as an application defect because the test returned `200 OK` instead of the expected `403 Forbidden`.
+
+
+
+Overridden
+
+
+
+The final test scope was narrowed to the higher-risk claim business rules, claim submission flow, frontend claim form and Kafka messaging path instead of implementing exhaustive endpoint and frontend coverage.
+
+
+
+The authorization test was not included in the final test suite because its result required further investigation into the test security configuration.
+
+
+
+Reasoning
+
+
+
+The final decisions were based on application risk, assessment requirements, available time and behaviours that could be reliably verified through local testing.
 
 
 
